@@ -36,3 +36,9 @@ test('audio is user initiated and chapter transcript exists',()=>{
   assert.ok(app.includes('AudioContext'));
   assert.ok(html.includes('transcript-panel'));
 });
+
+
+test('hero visual retains the message artwork and correct portrait dimensions',()=>{
+  assert.match(html,/hold-the-moment\.webp[^>]*width="800" height="1000"/);
+  assert.ok(existsSync(resolve(root,'public/images/hold-the-moment.webp')));
+});

@@ -10,7 +10,7 @@ Created specifically for this project with an image-generation tool on 24 Novemb
 | `public/images/amplification-map.webp` | A branching network of luminous message shapes | Fallback for Chapter 02 illustrative photograph; also original available artwork | Static communication metaphor |
 | `public/images/support-bridge.webp` | Two divided fields connected by a warm bridge into sage-green pathways | Chapter 04, plus fallback in Support | Calm visual transition to support and constructive action |
 
-Original generation canvas was a three-panel artwork. The crops are local images. No external illustration domains are required.
+The original triptych was used for the amplification and bridge crops. The hero was regenerated separately as a portrait composition after visual review found the original crop hid the message tile. The revised hero is a locally compressed 800 × 1000 WebP. No external illustration domains are required.
 
 ## Real photographs (remote, with local original artwork fallbacks)
 

@@ -33,3 +33,14 @@ Run `tests/browser_smoke.py` in a browser-capable environment; inspect desktop, 
 - Teacher-specific rubric confirmation remains unresolved because the official marking rubric was omitted from the provided task.
 
 These points should be surfaced during owner acceptance rather than silently marked as passed.
+
+
+## Post-push audit — 24 November 2026
+
+The first connected GitHub Actions run (`45332733036`, commit `ea79326`) independently passed dependency installation, strict TypeScript, content validation, all six then-current source tests, and the production build. Deployment failed at `actions/configure-pages@v5` because GitHub Pages was not yet enabled for this new repository; `upload-pages-artifact` and the deployment job were skipped.
+
+The public URL was checked, but no published site could be loaded before Pages activation. GitHub does not expose the Pages administration setting through the connected app. The repository owner must select **Settings → Pages → Build and deployment → Source → GitHub Actions** once. The existing workflow is otherwise in place.
+
+Local Chromium blocked all direct HTTP/file navigation with `net::ERR_BLOCKED_BY_ADMINISTRATOR`. To test the actual compiled DOM and interactions despite that restriction, an in-memory Playwright harness loaded the production HTML, compiled JavaScript, and CSS in `about:blank` with the CSP meta directive removed solely for this restricted test harness. At 1440×900, 768×1024, 390×844, 320×680, and reduced-motion 390×844, it exercised chart switching, scenario feedback, network-choice explanations and fallback, support navigation, transcript controls, local wall sanitisation/deletion, mobile menu, and layout overflow. All five passed with zero uncaught page errors and zero horizontal overflow. This is not equivalent to a live-host test, and in that sandbox WebGL was unavailable; shader compilation, real photography transfers, audio output, and hosted CSP remain unverified.
+
+Manual screenshot review exposed a hero-art composition issue: the original cropped montage removed the actual message tile. A new portrait version of the same metaphor replaced the image and is now displayed in the focal area. The source test suite includes a dedicated hero-dimension regression check.

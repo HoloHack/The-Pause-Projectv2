@@ -2,7 +2,8 @@ import asyncio,json
 from pathlib import Path
 from playwright.async_api import async_playwright
 URL='http://127.0.0.1:4173/'
-OUT=Path('/mnt/data/the-pause-project-v2/docs')
+OUT=Path(__file__).resolve().parents[1]/'docs'
+OUT.mkdir(parents=True,exist_ok=True)
 
 async def check(browser,width,height,reduced=False):
     context=await browser.new_context(viewport={'width':width,'height':height},reduced_motion='reduce' if reduced else 'no-preference')

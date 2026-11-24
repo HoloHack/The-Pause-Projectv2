@@ -2,6 +2,13 @@
 
 **One message. A network of consequences.** An evidence-led, five-chapter multimodal experience for Australian secondary students about bullying and cyberbullying: recognition, safer bystander choices and practical support.
 
+
+### GitHub Pages one-time activation (required for a new repository)
+
+If GitHub Actions fails at **Prepare Pages** with *Get Pages site failed: Not Found*, the build may be healthy; the Pages site has not been enabled. An owner must open [repository Pages settings](https://github.com/HoloHack/The-Pause-Projectv2/settings/pages) and select **Build and deployment → Source → GitHub Actions**. Then rerun the failed workflow or push a new commit. The site should publish to `https://holohack.github.io/The-Pause-Projectv2/` after a successful deploy. There is no need to create another workflow.
+
+GitHub Actions builds and tests the source before publishing. A successful build alone is not proof that the live website deployed or that every graphics/audio device works; confirm the live URL and test it on a device.
+
 ## What is included
 
 - Five original, responsive editorial chapters (Hold, Recognise, Intervene, Support, Next Move).
@@ -96,8 +103,3 @@ See `docs/QA_REPORT.md` and `docs/KNOWN_LIMITATIONS.md` for the results that wer
 ## School assignment status
 
 The actual teacher's complete rubric and submission instructions were not present in the supplied brief. This release implements the recovered multimodality and cyberbullying topic requirements, but cannot legitimately claim compliance with unseen marking bands. The matrix in `docs/REQUIREMENTS_MATRIX.md` marks this limitation.
-
-
-## GitHub Pages project path
-
-`vite.config.ts` declares `base: "/The-Pause-Projectv2/"` for this repository. The lightweight TypeScript production build copies files with relative asset URLs (`./assets/`, `./images/`, `./styles.css`), which resolve inside the same Pages subdirectory. The build and source validation check the configured path, even though this project uses the custom `scripts/build.mjs` instead of the Vite CLI.
