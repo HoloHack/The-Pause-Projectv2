@@ -1,0 +1,23 @@
+import {readFileSync,readdirSync,statSync,existsSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+const root=resolve(import.meta.dirname,'..');
+const read=file=>readFileSync(join(root,file),'utf8');
+const html=read('index.html');
+if(!/base:\s*["']\/The-Pause-Projectv2\/["']/.test(read('vite.config.ts')))throw new Error('Incorrect GitHub Pages base path');
+const css=read('styles.css');
+const app=read('src/app.ts');
+const graph=read('src/graph.ts');
+const required=['id="hold"','id="recognise"','id="intervene"','id="support"','id="next"','id="chart-visual"','id="network-canvas"','id="reflection-form"','id="support-diagram"','id="help-links"','id="narrate-current"'];
+for(const marker of required)if(!html.includes(marker))throw new Error('Missing required element '+marker);
+for(const token of ['53','38','46','34','57','42','59','39','48','3,454'])if(!html.includes(token))throw new Error('Missing published survey figure '+token);
+for(const link of ['esafety.gov.au','bullyingnoway.gov.au','kidshelpline.com.au','stopbullying.gov'])if(!html.includes(link))throw new Error('Missing source '+link);
+for(const file of ['public/images/hold-the-moment.webp','public/images/amplification-map.webp','public/images/support-bridge.webp','.github/workflows/deploy.yml','README.md','ASSET_CREDITS.md'])if(!existsSync(join(root,file)))throw new Error('Missing release file '+file);
+if(!html.includes("img-src 'self' data: https://images.unsplash.com"))throw new Error('CSP missing photography domain');
+if(!html.includes('rel="noopener noreferrer"'))throw new Error('External-link protections missing');
+if(/on(?:click|error|load)\s*=/.test(html))throw new Error('Inline event handlers found');
+if(/\b(?:TODO|FIXME|TBD)\b/.test(html+css+app+graph))throw new Error('Unfinished implementation marker');
+if(!graph.includes('#version 300 es')||!graph.includes('WebGL2RenderingContext'))throw new Error('Purpose-driven GLSL graph absent');
+if(!app.includes('textContent=note.text'))throw new Error('Unsafe wall rendering pattern');
+if(!app.includes('SpeechSynthesisUtterance')||!app.includes('AudioContext'))throw new Error('Multimodal audio absent');
+for(const asset of readdirSync(join(root,'public/images'))){if(statSync(join(root,'public/images',asset)).size<1000)throw new Error('Asset unusually small '+asset)}
+console.log('Content, CSP, links, structure, assets and safety checks passed.');

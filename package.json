@@ -1,0 +1,17 @@
+{
+  "name": "the-pause-project-v2",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidence-led five-chapter cyberbullying prevention experience for Australian students",
+  "engines": {"node": ">=20"},
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "lint": "node scripts/validate.mjs",
+    "dev": "node scripts/dev.mjs",
+    "preview": "node scripts/serve.mjs"
+  },
+  "devDependencies": {"typescript": "^5.8.3"}
+}

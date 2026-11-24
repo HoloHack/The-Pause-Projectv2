@@ -1,0 +1,16 @@
+import {spawnSync} from 'node:child_process';
+import {cpSync,copyFileSync,existsSync,mkdirSync,rmSync,readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+const root=resolve(import.meta.dirname,'..');
+const config=readFileSync(resolve(root,'vite.config.ts'),'utf8');
+if(!/base:\s*["']\/The-Pause-Projectv2\/["']/.test(config))throw new Error('GitHub Pages base path must be /The-Pause-Projectv2/');
+const dist=resolve(root,'dist');
+if(existsSync(dist))rmSync(dist,{recursive:true,force:true});
+mkdirSync(resolve(dist,'assets'),{recursive:true});
+const files=['index.html','styles.css'];
+for(const file of files)copyFileSync(resolve(root,file),resolve(dist,file));
+cpSync(resolve(root,'public'),dist,{recursive:true});
+const result=spawnSync('tsc',['--project',resolve(root,'tsconfig.json'),'--outDir',resolve(dist,'assets')],{stdio:'inherit',shell:process.platform==='win32'});
+if(result.error)throw result.error;
+if(result.status!==0)process.exit(result.status||1);
+console.log('Production build completed:',dist);
